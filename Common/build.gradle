@@ -1,0 +1,35 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'war'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+war {
+    baseName = 'server'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final")
+    compile("com.google.guava:guava:17.0")
+    compile("com.squareup.retrofit:retrofit:1.6.1")
+    compile("commons-io:commons-io:2.4")
+	
+	compile("com.fasterxml.jackson.core:jackson-core:2.4.0")
+	compile("com.fasterxml.jackson.core:jackson-databind:2.4.0")
+	compile("com.fasterxml.jackson.core:jackson-annotations:2.4.0")
+	compile("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.4.0")
+	
+	testCompile("com.googlecode.openpojo:openpojo:0.4.9")
+	testCompile("junit:junit:4.10")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
