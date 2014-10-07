@@ -187,7 +187,7 @@ The Server Project
 ###Setup
 
    1. Download and install the latest version of Eclipse or Intellij
-   2. Import the Common project as a Gradle project
+   2. Import the Server project as a Gradle project
   
 ###Code Overview
 
