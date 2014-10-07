@@ -181,7 +181,162 @@ _How do I run a test?_ All you need to do is right-click on the test, Run As->JU
 _How do I add a test?_ Select the package that you want to add the test to (it must be beneath src/test) and
 then File->New->JUnit Test Case. Add one or more methods annotated with @Test.
 
+The Server Project
+-------------------
 
+The server-side of the application provides a simple REST-based service to store metadata relating to videos.
+The server uses Object Relational Mapping (ORM) to allow you to persist data. In this case, the server is 
+providing a REST-based interface to persist instances of the Video class into a database.
+
+There is very little code in the server. Most of the work is done by Spring Boot and Spring Data Rest. These 
+frameworks automaticaly setup a web server, database, and all of the REST infrastructure to create, read,
+update, and delete Video objects using a REST-based interface. An in-depth tutorial of Spring Data Rest and
+how this works is available here: http://spring.io/guides/gs/accessing-data-rest/. We will go into these
+frameworks in detail later in the course.
+
+###How to Run the Server
+Right-click on the Application class->Run As->Java Application. When the server finishes launching, you should be able
+to open your browser to http://localhost:8080/video to see an empty list of videos.
+
+###How the Server Stores Data
+The server uses a standard, called Java Persistence API (JPA), to store objects. Any Java object can be annotated
+with special JPA annotations and automatically persisted to a database. JPA stores the state of the object, including
+all of its member variable values to a database. When you retrieve the object, JPA automatically extracts the
+object's state and member variable values from the database and sets their values. In this example, instances of
+the Video object are persisted in a database on the server with JPA:
+
+```java
+@Entity
+public class Video {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id = -1;
+
+	private String name;
+	private String url;
+	private long duration;
+	..
+}
+```
+
+The @Entity annotation tells JPA that you want to be able to store these objects in the database. The @Id annotation
+tells JPA what member variable should be used to uniquely identify each instance of the Video class. Finally, all
+of the member variable values (e.g., name, url, duration) are saved in the database when JPA stores a Video object.
+
+When you launch the server, Spring Boot automatically starts a database (which only persists data to memory in the
+current configuration), a web server, and a Java-based servlet framework for handling requests. Spring Boot looks
+for all of the classes that extend CrudRepository and then automatically creates implementations of them that
+can receive HTTP requests to peform CRUD operations on their associated object types. 
+
+```java
+@RepositoryRestResource(path = "/video")
+public interface VideoRepository extends CrudRepository<Video, Long>{
+     //  no methods necessary
+}
+```
+In the simple example above, the VideoRepository is declared as a CrudRepository that stores Video objects. Each
+Video object has a Long as its unique key (the second generic parameterization). The @RepositoryRestResource(path = "/video")
+annotation tells Spring that you want to create a REST interface that can receive requests at the "/video" path and
+automatically create/delete, etc. Video objects. Based on this interface and annotation, Spring creates a series of 
+HTTP request paths on your server for:
+
+_GET /video_ 
+   - returns the list of all videos stored on the server
+
+_GET /video/{id}_
+   - Returns the JSON for the video with the given id (e.g., /video/123)
+   
+_POST /video_ 
+   - add a video to the server
+   - takes a video object as an application/json body in the request
+
+_DELETE /video/{id}_
+   - delete the video with the given id 
+
+_PUT /video/{id}_
+   - replace the video with the given id using the JSON provided in the body of the request
+
+_etc._...
+
+_How do I store new types of objects on the server?_ Let's say that you wanted to store comments for each video. You
+would first create a class to store the comment data with the appropriate JPA annotations, like this:
+
+```java
+@Entity
+public class Video {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id = -1;
+
+	private String userThatPostedTheComment;
+	private String commentText;
+	private long creationTime;
+	..
+}
+```
+The next step would be to create the REST interface on the server to perform CRUD operations on the comments. To create
+this REST interface, you would simply create a new repostiory interface like this:
+
+```java
+@RepositoryRestResource(path = "/comment")
+public interface CommentRepository extends CrudRepository<Comment, Long>{
+     //  no methods necessary
+}
+```
+That's it. You would have created all of the code to then have the following REST paths on the server:
+
+  - GET /comment
+  - GET /comment/{id}
+  - POST /comment
+  - PUT /comment/{id}
+  - DELETE /comment/{id}
+  - etc..
+
+How would you interact with this new comment service from the client? To do that, you would just need to add
+some additional methods to the VideoSvcApi (or a new interface for commenting) like this:
+
+```java
+
+public interface VideoSvcApi {
+	
+	@GET("/video")
+	public Collection<Video> getVideoList();
+	
+	@GET("/comment")
+	public Collection<Comment> getAllComments();
+	
+	@POST("/comment")
+	public Void addComment(@Body Comment c);
+}
+
+```
+
+Once you did that, you could post a comment like this from your Android client:
+
+```java
+VideoSvcApi svc = new RestAdapter.Builder()
+				.setEndpoint("http://someserver.com").setLogLevel(LogLevel.FULL).build()
+				.create(VideoSvcApi.class);
+				
+Comment comment = new Comment();
+comment.setUserThatPostedTheComment("Jill Smith");
+comment.setCommentText("This movie was great");
+
+svc.addComment(comment);
+```
+Using the code above that would be running on your Android client, Retrofit would convert your Comment object to JSON,
+put that JSON into the body of an HTTP POST request, and send the HTTP request to the server. The server would receive
+the request, unmarshall the Comment object from the JSON in the request body, store the Comment object in the database,
+and then let the client know that the request succeeded.
+
+###Testing
+
+There is very little actual code in the server. What code is there is primarily interfaces or boilerplate configuration
+code. The server has a single JUnit test that checks that the server correctly implements all of the HTTP REST methods
+that we expect in order to support the VideoSvcApi. The VideoSvcClientApiTest is the only test and is simple JUnit
+test. You add/run tests in this project identically to the Common project.
 
 
 The gitingore file
