@@ -15,22 +15,39 @@ The project template contains 3 sub-projects:
   - _Common_: contains a Gradle-based Java project that is shared by both the Client and Server 
               projects and automatically included in both builds
 
+Recommended Development Tools
+------------------------------
+1. Git (command line)
+2. Android Studio
+2. Eclipse
+3. Genymotion Android Emulator (http://www.genymotion.com/)
+
+Install all of the above software. After installing the software, make sure that you:
+
+1. Open Android Studio, select the "SDK Manager" (right-hand side of the top menu bar) and 
+   download the Android 4.3 and 4.4 SDK tools
+2. Open Genymotion, click Add, and then select an emulator, such as a Nexus 5 device.
+3. Select the emulator in Genymotion and hit play. If you see an error, read this link
+   to resolve it (and call me over to get help)   
+   http://stackoverflow.com/questions/19922077/genymotion-unable-to-start-the-genymotion-virtual-device
+
 The Client Project
 -------------------
 
-_Installation & Setup_
+###Setup
 
   1. Download and install the latest version of Android Studio
   2. Clone this repository
   3. In Android Studio, File->Import Project
   4. Select the Client directory and then OK
+  5. Click the play button to launch the application in the Android emulator
   
 The client contains a basic app for viewing a list of metadata for videos stored on the server. The
 client uses the Square Retrofit library (http://square.github.io/retrofit/) to send HTTP requests to
 the server to interact with the REST resources. Currently, the client simply displays a list of the
 videos that are stored on the server. 
 
-_Code Overview_
+###Code Overview
 
 The client has two activities: LoginScreenActivity and VideoListActivity. The LoginScreenActivity
 accepts a username and password (which aren't used in this example) and a server address. When
@@ -96,7 +113,7 @@ user interface elements. Using the CallableTask, networking operations can be ru
 results of those operations can be communicated to the user via changes to the GUI made by the callback
 object.
 
-_Testing_
+###Testing
 
 The Client template project is configured to use the Android JUnit-based testing framework. All of the test
 code is contained within the androidTest folder. Each class in the client application has an associated
@@ -113,3 +130,62 @@ functionality, they are actually _integration tests_. Normally, it is best to wr
 that isolate functionality and are simple to run. However, Android tests run so incredibly slowly, you might
 as well do integration testing with the actual server as it adds very little extra time.
 
+_How do I run a test?_ Android requires an emulator or real device in order to run tests. Start an emulator or
+connect an Android device via USB. When you want to run one of the tests, right-click on it->Run XYZTest. Android
+Studio will load the test into your emulator or device, execute it, and then display the results in the pane
+at the bottom of Android Studio.
+
+_How do I add a new test?_ First, determine which of the two types of tests listed above seems most appropriate.
+After you decide on the right type of test, copy/paste one of the existing tests into same package (or another
+one in the androidTest folder) and rename the test appropriately by right-clicking on it, Refactor->Rename.
+You can then add / delete / modify the test as needed. Since Android does not use the latest version of JUnit,
+you must name each of your test methods testXYZ. There are no @Test annotations. 
+
+The Common Project
+-------------------
+###Setup
+
+  1. Download and install the latest version of Eclipse or Intellij
+  2. Import the Common project as a Gradle project
+
+###Code Overview
+
+The Common project contains classes that are shared by both the client and server. Rather than duplicating this 
+shared code, the Common project is included in the builds for both of the other projects. Any code that you put
+into the Common project will be available to the client and server. 
+
+The Common project contains the "domain objects" or "model objects" that are used by the application. In this case,
+a Video object is used to represent video metadata. The Video class has simple member variables for different types
+of video metadata, such as the name and duration of the Video. The Video class also has special annotations that
+are used by the Server and discussed below.
+
+The VideoSvcApi is defined in the Common project. The interface contains the methods and Retrofit annotations that
+are used to build the client object that communicates with the server. Finally, the TestUtils class provides some
+helper methods for creating dummy Videos.
+
+###Testing
+
+There is little to test in this project, however, there are still tests included for each object. The project
+uses JUnit and the OpenPojo framework for testing. The VideoTest checks that the custom code in the equals()
+and hashcode() methods of the Video object works properly. 
+
+A common question is whether or not it makes sense to test getters/setters on objects. Manually creating tests
+of every getter/setter is time consuming. The PojoTest uses the OpenPojo framework to automatically discover every
+Plain Old Java Object (POJO) class in your application and test it. A POJO is just an object that is essentially
+all member variables and getters/setters (e.g., model objects). The PojoTest finds every one of these objects,
+tests that their getters/setters work properly, and also runs a number of other code structure tests against them.
+This tool saves you a vast amount of test implementation work while increasing your test coverage.
+
+_How do I run a test?_ All you need to do is right-click on the test, Run As->JUnit Test.
+
+_How do I add a test?_ Select the package that you want to add the test to (it must be beneath src/test) and
+then File->New->JUnit Test Case. Add one or more methods annotated with @Test.
+
+
+
+
+The gitingore file
+-------------------
+This repo is setup with a .gitignore file. This file automatically ignores all IDE settings, build artifacts, etc.
+that shouldn't be committed to the source repository. See the .gitignore file in the root of the repository for
+a list of the types of files and directories that are ignored.
