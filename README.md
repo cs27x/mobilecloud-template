@@ -24,6 +24,7 @@ and then setup a development environment for each group member. You should compl
 Team members should help each other get setup. 
 
 When you are done with your setup, you should be able to:
+0. Clone the Mobile Cloud application template from https://github.com/cs27x/mobilecloud-template.git
 1. Run the server application from Eclipse
 2. Run the JUnit tests in the server project and have them pass
 3. Run the JUnit tests in the Common project and have them pass
