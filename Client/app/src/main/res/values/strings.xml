@@ -10,5 +10,10 @@
     <string name="server">Server IP or Hostname</string>
     <string name="localhost">https://10.0.2.2:8443</string>
     <string name="title_activity_video_list">VideoListActivity</string>
+    <string name="add_movie">Add Video</string>
+    <string name="vidName">Video Name</string>
+    <string name="vidURL">Video URL</string>
+    <string name="vidDuration">Video Duration</string>
+    <string name="title_activity_add_video">AddVideoActivity</string>
 
 </resources>

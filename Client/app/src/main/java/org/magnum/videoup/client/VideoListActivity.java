@@ -18,6 +18,10 @@ import org.magnum.mobilecloud.video.repository.Video;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+
+import android.view.View;
+import android.content.Intent;
+
 public class VideoListActivity extends Activity {
 
 	@InjectView(R.id.videoList)
@@ -54,7 +58,7 @@ public class VideoListActivity extends Activity {
 				public void success(Collection<Video> result) {
 					List<String> names = new ArrayList<String>();
 					for (Video v : result) {
-						names.add(v.getName());
+						names.add(v.getName() + ": " + v.getUrl());
 					}
 					videoList_.setAdapter(new ArrayAdapter<String>(
 							VideoListActivity.this,
@@ -74,5 +78,10 @@ public class VideoListActivity extends Activity {
 			});
 		}
 	}
+
+    public void onAddVideoClick(View v) {
+        Intent intent = new Intent(this, AddVideoActivity.class);
+        startActivity(intent);
+    }
 
 }
