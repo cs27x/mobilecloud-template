@@ -184,6 +184,13 @@ then File->New->JUnit Test Case. Add one or more methods annotated with @Test.
 The Server Project
 -------------------
 
+###Setup
+
+   1. Download and install the latest version of Eclipse or Intellij
+   2. Import the Common project as a Gradle project
+  
+###Code Overview
+
 The server-side of the application provides a simple REST-based service to store metadata relating to videos.
 The server uses Object Relational Mapping (ORM) to allow you to persist data. In this case, the server is 
 providing a REST-based interface to persist instances of the Video class into a database.
