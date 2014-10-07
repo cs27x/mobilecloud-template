@@ -5,6 +5,46 @@ This project contains a template for a mobile cloud application that has a Sprin
 an Android client, and shared client/server code. The template includes appropriate testing for 
 each part of the mobile cloud application.
 
+## Key Information
+
+Released: 10-7-14
+
+Due Date: 10-7-14
+
+Close Time: 12:25
+
+Total Groups: 6
+
+Requires Group Completion: Yes
+
+## Part 1 - Group Setup
+
+For the first part of the exercise, you should read this guide to using the mobile cloud project template
+and then setup a development environment for each group member. You should complete this task as a group.
+Team members should help each other get setup. 
+
+When you are done with your setup, you should be able to:
+1. Run the server application from Eclipse
+2. Run the JUnit tests in the server project and have them pass
+3. Run the JUnit tests in the Common project and have them pass
+4. Run the Android application in Genymotion and get to the list of videos
+5. Run the Android tests in the AndroidStudio and view the results
+
+When every team member is setup and can perform the steps above, call an instructor over to verify that
+your group has completed this step.
+
+
+## Part 2 - Applicaton Extension
+
+For the second step, your group should design and implement a simple extension to the project and commit
+it to a groupX_extension branch in the repo. DO NOT commit and push to master! If you do, your group is responsible
+for fixing it. 
+
+What are some possible extensions?
+- Add a "like" button to each video in the client's video list
+- Add a list of actors to the client
+- Create a form to add a new movie from the client
+
 Project Anatomy
 ---------------
 
@@ -15,7 +55,7 @@ The project template contains 3 sub-projects:
   - _Common_: contains a Gradle-based Java project that is shared by both the Client and Server 
               projects and automatically included in both builds
 
-Recommended Development Tools
+Required Development Tools
 ------------------------------
 1. Git (command line)
 2. Android Studio
