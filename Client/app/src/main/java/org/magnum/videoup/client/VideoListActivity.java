@@ -7,6 +7,7 @@ import java.util.concurrent.Callable;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -17,6 +18,7 @@ import org.magnum.mobilecloud.video.repository.Video;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class VideoListActivity extends Activity {
 
@@ -74,5 +76,12 @@ public class VideoListActivity extends Activity {
 			});
 		}
 	}
+
+    @OnClick(R.id.button1)
+    public void addNewMovie() {
+        startActivity(new Intent(
+                VideoListActivity.this,
+                AddMovieActivity.class));
+    }
 
 }

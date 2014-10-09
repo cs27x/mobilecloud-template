@@ -8,13 +8,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".VideoListActivity" >
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add a new movie"/>
+
     <ListView
         android:id="@+id/videoList"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button1" >
 
     </ListView>
 
