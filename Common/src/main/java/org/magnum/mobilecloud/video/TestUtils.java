@@ -48,7 +48,7 @@ public class TestUtils {
                 "http://" + randomVideoName(),
                 randomVideoDuration());
     }
-
+    
     public static String randomVideoName() {
         return UUID.randomUUID().toString();
     }
