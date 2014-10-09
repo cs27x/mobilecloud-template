@@ -8,3 +8,4 @@ bin
 .classpath
 .idea
 *.iml
+.metadata
