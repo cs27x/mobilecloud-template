@@ -43,9 +43,46 @@ it to a groupX_extension branch in the repo. DO NOT commit and push to master! I
 for fixing it. 
 
 What are some possible extensions?
-- Add a "like" button to each video in the client's video list
 - Add a list of actors to the client
 - Create a form to add a new movie from the client
+
+
+## Part 3 - Adding Likes
+
+"As a movie fan, I want to be able to express my enthusiasm for a video so that other people are aware of how great the video is."
+
+For the final part of the exercise, your team will implement the ability to "like" a video. This change will require end-to-end updates in the code base. However, each individual change is relatively simple. Your team should divide up the work below and complete it. Each team member should have at least 1 commit that accomplishes an item on the list below:
+
+- Adding a "like" count to each video:
+   1. Create the data model
+   		1. Copy the Video class and rename it Like. 
+   		2. Remove all unneeded member variables from Like
+   		3. Add a member variable called "videoId" of type Long
+   		4. Add appropriate testing
+   		5. Commit / push these changes to a the new feature branch
+   3. Create the repository
+   		1. Pull the groupX/datamodel branch
+   		2. Create a new groupX/repository branch that includes the new data model
+   		3. Copy the VideoRepository class and rename it LikeRepository
+   		4. Change the generic parameters to <Like,Long>
+   		5. Change the RepositoryRestResource path to path = "like"
+   		6. Add a "findByVideoId" method that takes a long as a parameter and has the 
+   		   parameter annotated wtih @Param("videoId") 
+                7. Add appropriate testing
+   4. Update the client API
+                1. Pull the data model feature branch
+                2. Add the method: public Collection<Video> findLikesForVideo(@Query("videoId") long videoId);
+   		   parameter annotated wtih @Param("videoId") 
+                3. Add appropriate testing
+   5. Update the Android app to display the total likes (the hardest part)
+                1. Update the anonymous inner class' call method in VideoListActivity.refreshVideos()
+                   to use your new method on the client API to fetch the list of likes for each video
+                   and append the total count to each video's name in the nested success() method.
+                2. Add appropriate testing
+   6. Make sure that all of your changes are merged/committed/pushed to your groupX_extension branch
+   7. Demo your completed application and test to the instructor
+   8. Stretch goal: add a "like" button to each video
+
 
 Project Anatomy
 ---------------
