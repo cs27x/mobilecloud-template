@@ -48,6 +48,10 @@ public interface LikesRepository extends CrudRepository<Like, Long>{
 			// search for Videos
 			@Param("videoId") long videoId);
 	
+	public Collection<Video> findLikesForVideo(
+			
+			@Query("videoId") long videoId);
+	
 	/*
 	 * See: http://docs.spring.io/spring-data/jpa/docs/1.3.0.RELEASE/reference/html/jpa.repositories.html 
 	 * for more examples of writing query methods
