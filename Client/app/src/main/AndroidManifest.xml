@@ -4,11 +4,19 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -27,6 +35,10 @@
         <activity
             android:name="org.magnum.videoup.client.VideoListActivity"
             android:label="@string/title_activity_video_list" >
+        </activity>
+        <activity
+            android:name="org.magnum.videoup.client.AddVideo"
+            android:label="@string/title_activity_add_video" >
         </activity>
     </application>
 
