@@ -7,6 +7,7 @@
 package org.magnum.videoup.client;
 
 import org.magnum.mobilecloud.video.client.VideoSvcApi;
+import org.magnum.mobilecloud.video.repository.Video;
 
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
@@ -37,4 +38,6 @@ public class VideoSvc {
 
 		return videoSvc_;
 	}
+
+
 }
