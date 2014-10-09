@@ -21,14 +21,15 @@ public class Like {
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long videoId = -1;
-
+    private long likes = -1;
 
 	public Like() {
 	}
 
-	public Like(long videoId) {
+	public Like(long videoId, long likes) {
 		super();
 		this.videoId = videoId;
+		this.likes=likes;
 	}
 
     public long getVideoId() {
@@ -37,6 +38,14 @@ public class Like {
 
     public void setVideoId(long id) {
         videoId = id;
+    }
+    
+    public long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(long newlikes) {
+        likes = newlikes;
     }
 
 
