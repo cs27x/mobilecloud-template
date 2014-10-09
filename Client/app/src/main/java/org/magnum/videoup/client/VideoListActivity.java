@@ -58,7 +58,7 @@ public class VideoListActivity extends Activity {
 				public void success(Collection<Video> result) {
 					List<String> names = new ArrayList<String>();
 					for (Video v : result) {
-						names.add(v.getName() + ": " + v.getUrl());
+						names.add(v.getName());
 					}
 					videoList_.setAdapter(new ArrayAdapter<String>(
 							VideoListActivity.this,
