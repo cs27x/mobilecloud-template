@@ -50,6 +50,7 @@ public class VideoListActivity extends Activity {
 				}
 			}, new TaskCallback<Collection<Video>>() {
 
+                //this is where video collection is collected
 				@Override
 				public void success(Collection<Video> result) {
 					List<String> names = new ArrayList<String>();
