@@ -26,6 +26,8 @@ import butterknife.InjectView;
 
 public class VideoListActivity extends Activity {
 
+    final static int REQUEST = 1;
+
 	@InjectView(R.id.videoList)
 	protected ListView videoList_;
 
@@ -40,7 +42,7 @@ public class VideoListActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+
 		refreshVideos();
 	}
     @Override
@@ -57,6 +59,8 @@ public class VideoListActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_new) {
+            Intent intent = new Intent(this, AddVideo.class);
+            startActivityForResult(intent, REQUEST);
             return true;
         }
         return super.onOptionsItemSelected(item);
