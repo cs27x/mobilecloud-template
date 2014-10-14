@@ -1,23 +1,26 @@
 package org.magnum.videoup.client;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
+import org.magnum.mobilecloud.video.client.VideoSvcApi;
+import org.magnum.mobilecloud.video.repository.Video;
+
 public class AddVideo extends Activity {
-    EditText name;
+    EditText title;
     EditText duration;
     EditText url;
+    final VideoSvcApi svc = VideoSvc.getOrShowLogin(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_video);
-        name = (EditText) findViewById(R.id.name);
-        duration = (EditText) findViewById(R.id.duration);
-        url = (EditText) findViewById(R.id.url);
     }
 
 
@@ -42,8 +45,26 @@ public class AddVideo extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void upload(){
-        String myName = name.getText().toString();
+    public void onPost(View view){
 
+        title = (EditText)findViewById(R.id.title);
+        url = (EditText)findViewById(R.id.url);
+        duration = (EditText)findViewById(R.id.duration);
+
+        long myDuration;
+        try {
+            myDuration = Long.parseLong(duration.getText().toString());
+        }
+        catch (NumberFormatException e){
+            System.out.println(duration.toString());
+            myDuration = 20;
+        }
+
+        Video vid = new Video(title.getText().toString(), url.getText().toString(), myDuration);
+        new PostToServer().execute(svc, vid);
+
+        Intent resultIntent = new Intent();
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
     }
 }

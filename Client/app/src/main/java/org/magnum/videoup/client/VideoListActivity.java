@@ -8,6 +8,9 @@ import java.util.concurrent.Callable;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -19,6 +22,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public class VideoListActivity extends Activity {
+
+    final static int REQUEST = 1;
 
 	@InjectView(R.id.videoList)
 	protected ListView videoList_;
@@ -34,9 +39,31 @@ public class VideoListActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+
 		refreshVideos();
 	}
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.video_list, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_new) {
+            Intent intent = new Intent(this, AddVideo.class);
+            startActivityForResult(intent, REQUEST);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 	private void refreshVideos() {
 		final VideoSvcApi svc = VideoSvc.getOrShowLogin(this);
