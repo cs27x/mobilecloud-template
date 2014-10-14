@@ -12,7 +12,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="server">Server IP or Hostname</string>
-    <string name="localhost">https://10.0.2.2:8443</string>
+    <string name="localhost">http://10.0.2.2:8080</string>
     <string name="title_activity_video_list">VideoListActivity</string>
     <string name="title_activity_add_video">AddVideo</string>
     <string name="hello_world">Hello world!</string>

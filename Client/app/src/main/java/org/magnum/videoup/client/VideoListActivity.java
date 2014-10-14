@@ -8,15 +8,12 @@ import java.util.concurrent.Callable;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 
 import org.magnum.mobilecloud.video.client.VideoSvcApi;
 import org.magnum.mobilecloud.video.repository.Video;
@@ -45,6 +42,7 @@ public class VideoListActivity extends Activity {
 
 		refreshVideos();
 	}
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -65,6 +63,7 @@ public class VideoListActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 	private void refreshVideos() {
 		final VideoSvcApi svc = VideoSvc.getOrShowLogin(this);
