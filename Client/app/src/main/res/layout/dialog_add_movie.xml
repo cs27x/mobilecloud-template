@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <EditText
+        android:id="@+id/mName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Movie Name" >
+    </EditText>
+    <EditText
+        android:id="@+id/mUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mName"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="URL" />
+    <EditText
+        android:id="@+id/mDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mUrl"
+        android:layout_centerHorizontal="true"
+        android:inputType="number"
+        android:ems="10"
+        android:hint="Duration" />
+    <Button
+        android:id="@+id/savebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/canbtn"
+        android:layout_alignBottom="@+id/canbtn"
+        android:layout_alignRight="@+id/mDuration"
+        android:text="Save" />
+    <Button
+        android:id="@+id/canbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/mDuration"
+        android:layout_below="@+id/mDuration"
+        android:text="Cancel" />
+</RelativeLayout>
