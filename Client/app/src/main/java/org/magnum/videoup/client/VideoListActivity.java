@@ -90,7 +90,7 @@ public class VideoListActivity extends Activity {
 		}
 	}
 
-    @OnClick(R.id.button1)
+    @OnClick(R.id.btn_addNewMovie)
     public void addNewMovie() {
         custom = new Dialog(VideoListActivity.this);
         custom.setContentView(R.layout.dialog_add_movie);
